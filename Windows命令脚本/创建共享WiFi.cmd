@@ -1,0 +1,1 @@
+netsh wlan set hostednetwork mode=allow ssid=SH-PC key=27433660
