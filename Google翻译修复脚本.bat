@@ -1,46 +1,35 @@
-:: Copyright (c)2022 https://bookfere.com
-:: This is a batch script for fixing Google Translate and making it available
-:: in the Chinese mainland. If you experience any problem, visit the page below:
-:: https://bookfere.com/post/1020.html
-
-@setlocal enabledelayedexpansion
 @echo off
+PUSHD %~DP0 & cd /d "%~dp0"
+%1 %2
+mshta vbscript:createobject("shell.application").shellexecute("%~s0","goto :runas","","runas",1)(window.close)&goto :eof
 
-set "source_domain=google.cn"
-set "target_domain=translate.googleapis.com"
+:runas
+CHCP 65001
+@echo hosts默认目录为：
+SET hosts=C:\Windows\System32\drivers\etc\hosts
 
-set "hosts_file=C:\Windows\System32\drivers\etc\hosts"
+if exist %hosts% goto hosts
+goto nofile
 
-for /f "skip=4 tokens=2" %%a in ('"nslookup %source_domain% 2>NUL"') do set ip=%%a
-set "old_rule=null"
-set "new_rule=%ip% %target_domain%"
+:hosts
+@xcopy %hosts% %hosts%_bak\ /d /c /i /y
+@echo hosts文件已备份，备份目录为%hosts%_bak
+@echo 172.217.163.42 translate.googleapis.com >>%hosts%
+@echo 172.217.160.78 translate.google.com >>%hosts%
+@echo 刷新DNS解析缓存
+ipconfig /flushdns
+echo hosts文件已修改，请按任意键退出
+@pause > nul
+@exit
 
-for /f "tokens=*" %%i in ('type %hosts_file%') do (
-    set "line=%%i"
-    :: Retrieve the rule If the target domain has been exists in the line.
-    if not "!line:%target_domain%=!"=="%%i" set "old_rule=%%i"
-)
-
-if not "%old_rule%"=="null" (
-    if not "%old_rule%"=="%new_rule%" (
-        echo Deleting the rule "%old_rule%"
-        echo Adding the rule "%new_rule%"
-        for /f "tokens=*" %%i in ('type "%hosts_file%" ^| find /v /n "" ^& break ^> "%hosts_file%"') do (
-            set "rule=%%i"
-            set "rule=!rule:*]=!"
-            if "%old_rule%"=="!rule!" set "rule=%new_rule%"
-            >>%hosts_file% echo(!rule!
-        )
-    ) else (
-        echo The rule already exists, nothing to do.
-    )
-) else (
-    echo Adding the rule "%new_rule%"
-    echo.>>%hosts_file%
-    echo.>>%hosts_file%
-    echo # Fix Google Translate CN>>%hosts_file%
-    echo %new_rule%>>%hosts_file%
-)
-
-echo Done.
-pause
+:nofile
+set /p a= 请输入hosts地址（例如：C:\Windows\System32\drivers\etc）:
+@xcopy %a%\hosts %a%\hosts_bak\ /d /c /i /y
+@echo HOSTS文件已备份，hosts文件已备份，备份目录为%a%\hosts_bak
+@echo 220.181.174.162 translate.googleapis.com >>%a%\hosts
+@echo 113.108.239.162 translate.google.com >>%a%\hosts
+@echo 刷新DNS解析存
+ipconfig /flushdns
+echo hosts文件已修改，请按任意键退出
+@pause > nul
+@exit
