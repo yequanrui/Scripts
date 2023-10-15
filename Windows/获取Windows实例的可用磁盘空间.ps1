@@ -1,0 +1,1 @@
+Get-CimInstance -ClassName Win32_LogicalDisk | Format-Table DeviceID, DriveType, ProviderName, VolumeName, @{n = "Size(GB)"; e = { [math]::Round($_.Size / 1GB, 2) } }, @{n = "FreeSpace(GB)"; e = { [math]::Round($_.FreeSpace / 1GB, 2) } }
