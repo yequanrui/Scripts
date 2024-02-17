@@ -14,8 +14,8 @@ goto nofile
 :hosts
 @xcopy %hosts% %hosts%_bak\ /d /c /i /y
 @echo hosts文件已备份，备份目录为%hosts%_bak
-@echo 172.217.163.42 translate.googleapis.com >>%hosts%
-@echo 172.217.160.78 translate.google.com >>%hosts%
+@echo 64.233.189.191 translate.googleapis.com >>%hosts%
+@echo 64.233.189.191 translate.google.com >>%hosts%
 @echo 刷新DNS解析缓存
 ipconfig /flushdns
 echo hosts文件已修改，请按任意键退出
@@ -26,8 +26,8 @@ echo hosts文件已修改，请按任意键退出
 set /p a= 请输入hosts地址（例如：C:\Windows\System32\drivers\etc）:
 @xcopy %a%\hosts %a%\hosts_bak\ /d /c /i /y
 @echo HOSTS文件已备份，hosts文件已备份，备份目录为%a%\hosts_bak
-@echo 220.181.174.162 translate.googleapis.com >>%a%\hosts
-@echo 113.108.239.162 translate.google.com >>%a%\hosts
+@echo 64.233.189.191 translate.googleapis.com >>%a%\hosts
+@echo 64.233.189.191 translate.google.com >>%a%\hosts
 @echo 刷新DNS解析存
 ipconfig /flushdns
 echo hosts文件已修改，请按任意键退出

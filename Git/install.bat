@@ -35,7 +35,7 @@ exit
 :x86
 @REM 程序名变更需要同步变更以下引号内名字
 echo.正在安装Git(32位)...
-"Git-2.42.0.2-32-bit.exe" /VERYSILENT /SP- /loadinf=./install.inf
+"Git-2.43.0-32-bit.exe" /VERYSILENT /SP- /loadinf=./install.inf
 echo.正在安装Git客户端&汉化包...
 msiexec /package "TortoiseGit-2.15.0.0-32bit.msi" /quiet /norestart
 msiexec /package "TortoiseGit-LanguagePack-2.15.0.0-32bit-zh_CN.msi" /quiet /norestart
@@ -44,7 +44,7 @@ goto :eof
 :x64
 @REM 程序名变更需要同步变更以下引号内名字
 echo.正在安装Git(64位)...
-"Git-2.42.0.2-64-bit.exe" /VERYSILENT /SP- /loadinf=./install.inf
+"Git-2.43.0-64-bit" /VERYSILENT /SP- /loadinf=./install.inf
 echo.正在安装Git客户端&汉化包...
 msiexec /package "TortoiseGit-2.15.0.0-64bit.msi" /quiet /norestart
 msiexec /package "TortoiseGit-LanguagePack-2.15.0.0-64bit-zh_CN.msi" /quiet /norestart
