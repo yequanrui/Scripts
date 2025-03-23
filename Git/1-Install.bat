@@ -8,12 +8,12 @@ mode con cols=60 lines=14
 
 if /i "%PROCESSOR_IDENTIFIER:~0,3%" == "X86" (
 echo 当前系统为32位系统
-set git_install=Git-2.47.1-64-bit.exe
-set tortoiseGit_install=TortoiseGit-2.17.0.2-64bit.msi
-set tortoiseGit_lang_install=TortoiseGit-LanguagePack-2.17.0.0-64bit-zh_CN.msi
+set git_install=Git-2.48.1-32-bit.exe
+set tortoiseGit_install=TortoiseGit-2.17.0.2-32bit.msi
+set tortoiseGit_lang_install=TortoiseGit-LanguagePack-2.17.0.0-32bit-zh_CN.msi
 ) else (
 echo 当前系统为64位系统
-set git_install=Git-2.47.1-64-bit.exe
+set git_install=Git-2.48.1-64-bit.exe
 set tortoiseGit_install=TortoiseGit-2.17.0.2-64bit.msi
 set tortoiseGit_lang_install=TortoiseGit-LanguagePack-2.17.0.0-64bit-zh_CN.msi
 )
